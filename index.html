@@ -600,8 +600,8 @@ body {
    Key West. Powers the hero chip, countdown, and happy hour.
    ============================================================ */
 (function() {
-  var API = 'https://api.open-meteo.com/v1/forecast?latitude=24.5551&longitude=-81.7800&current=temperature_2m&daily=sunset&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=2';
-  var sunsetToday = null, sunsetTomorrow = null;
+  var API = 'https://api.open-meteo.com/v1/forecast?latitude=24.5551&longitude=-81.7800&current=temperature_2m&daily=sunrise,sunset&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=2';
+  var sunsets = [], sunrises = [];
 
   function kwNow() {
     return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
@@ -617,12 +617,12 @@ body {
     .then(function(r) { return r.json(); })
     .then(function(d) {
       var temp = Math.round(d.current.temperature_2m);
-      sunsetToday = new Date(d.daily.sunset[0]);
-      sunsetTomorrow = new Date(d.daily.sunset[1]);
+      sunsets = d.daily.sunset.map(function(s) { return new Date(s); });
+      sunrises = d.daily.sunrise.map(function(s) { return new Date(s); });
       var el = document.querySelector('[data-live-text]');
       if (el) el.textContent = temp + '°F on the sand right now';
       var st = document.querySelector('[data-sunset-time]');
-      if (st) st.textContent = fmtClock(sunsetToday) + ' tonight';
+      if (st) st.textContent = fmtClock(sunsets[0]) + ' tonight';
       tick();
     })
     .catch(function() {
@@ -630,23 +630,37 @@ body {
       if (el) el.textContent = 'Perfect beach weather, probably';
     });
 
+  function nextAfter(list, now) {
+    for (var i = 0; i < list.length; i++) { if (list[i] > now) return list[i]; }
+    return null;
+  }
+  function countdownTo(target, now, cd) {
+    var diff = Math.max(0, target - now);
+    var hrs = Math.floor(diff / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    cd.textContent = pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+  }
   function tick() {
     var now = kwNow();
     var cd = document.querySelector('[data-countdown]');
     var lbl = document.querySelector('[data-countdown-label]');
-    if (cd && sunsetToday) {
-      var target = now < sunsetToday ? sunsetToday : sunsetTomorrow;
-      var diff = Math.max(0, target - now);
-      var afterGlow = now >= sunsetToday && (now - sunsetToday) < 40 * 60000;
+    if (cd && sunsets.length) {
+      var lastSunset = null;
+      for (var i = 0; i < sunsets.length; i++) { if (sunsets[i] <= now) lastSunset = sunsets[i]; }
+      var afterGlow = lastSunset && (now - lastSunset) < 40 * 60000;
+      var nextSunset = nextAfter(sunsets, now);
+      var nextSunrise = nextAfter(sunrises, now);
       if (afterGlow) {
         cd.textContent = 'Now';
         lbl.textContent = 'the bell rang — golden hour in progress';
-      } else {
-        var hrs = Math.floor(diff / 3600000);
-        var mins = Math.floor((diff % 3600000) / 60000);
-        var secs = Math.floor((diff % 60000) / 1000);
-        cd.textContent = pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
-        lbl.textContent = now < sunsetToday ? 'until sunset tonight' : 'until sunset tomorrow';
+      } else if (nextSunrise && (!nextSunset || nextSunrise < nextSunset)) {
+        /* after dark — count to sunrise instead */
+        countdownTo(nextSunrise, now, cd);
+        lbl.textContent = 'until sunrise — the sun is back at ' + fmtClock(nextSunrise);
+      } else if (nextSunset) {
+        countdownTo(nextSunset, now, cd);
+        lbl.textContent = 'until sunset tonight';
       }
     }
     /* happy hour ribbon */
