@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Salty Iguana — Beach Bar & Kitchen</title>
+<meta name="description" content="The Salty Iguana is a beach bar concept — cold drinks, warm sand, front-row sunsets. A demonstration build.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THE SALTY IGUANA — dusk on the sand
+   ============================================================ */
+:root {
+  --dusk:   #12454b;
+  --dusk-2: #0c3238;
+  --ocean:  #17646c;
+  --coral:  #ff7a4d;
+  --coral-2:#e85f33;
+  --gold:   #ffc76b;
+  --sand:   #f7ecd9;
+  --sand-2: #f1e2c8;
+  --ink:    #1d2a2c;
+  --soft:   #5f7376;
+  --iguana: #79b843;
+  --line:   #e3d4b8;
+  --font-display: 'Baloo 2', cursive;
+  --font-body: 'Karla', sans-serif;
+  --radius: 22px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 90px; }
+body {
+  background: var(--sand);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--coral); color: #fff; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+.caps {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: rgba(18,69,75,0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav__brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--sand);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__brand em { font-style: normal; color: var(--gold); }
+.nav__links { display: flex; align-items: center; gap: 26px; }
+.nav__links a:not(.btn) {
+  color: rgba(247,236,217,0.8);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+}
+.nav__links a:not(.btn):hover { color: #fff; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--coral);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 13px 30px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.btn:hover { background: var(--coral-2); transform: translateY(-2px); }
+.btn--sand { background: var(--sand); color: var(--dusk); }
+.btn--sand:hover { background: #fff; }
+.nav .btn { padding: 9px 20px; font-size: 15px; }
+
+/* ============================================================
+   HERO — dusk gradient with sun and iguana
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--dusk-2) 0%, var(--dusk) 34%, var(--ocean) 58%, #d96f45 86%, var(--coral) 100%);
+  color: var(--sand);
+  padding: 160px 0 0;
+  text-align: center;
+}
+.hero__sun {
+  position: absolute;
+  left: 50%;
+  bottom: -120px;
+  transform: translateX(-50%);
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold) 0%, rgba(255,199,107,0.55) 55%, transparent 72%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 92px);
+  line-height: 1.02;
+  max-width: 16ch;
+  margin: 0 auto;
+}
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero__sub {
+  margin: 22px auto 0;
+  max-width: 500px;
+  font-size: 19px;
+  color: rgba(247,236,217,0.85);
+}
+.hero__live {
+  margin: 34px auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(12,50,56,0.55);
+  border: 1.5px solid rgba(247,236,217,0.25);
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-weight: 700;
+  font-size: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.hero__live .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); animation: pulse 2.4s ease infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.hero__actions { margin-top: 34px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.hero__scene { position: relative; margin-top: 46px; height: 200px; }
+.hero__scene svg { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); width: min(760px, 96%); }
+
+/* happy hour ribbon */
+.hh {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 13px 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+}
+.hh b { color: var(--coral-2); }
+
+/* ============================================================
+   MENU BOARDS
+   ============================================================ */
+.section { padding: 100px 0; }
+.section__head { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+.section__head .caps { color: var(--coral-2); display: block; margin-bottom: 12px; }
+.section__head h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.04;
+}
+.section__head h2 em { font-style: normal; color: var(--coral-2); }
+.section__head p { margin-top: 12px; color: var(--soft); font-size: 17.5px; }
+
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.board {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 40px 38px;
+  box-shadow: 0 20px 50px rgba(29,42,44,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.board::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+}
+.board--drinks::before { background: var(--coral); }
+.board--bites::before { background: var(--iguana); }
+.board__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 27px;
+  margin-bottom: 4px;
+}
+.board__note { font-style: italic; color: var(--soft); font-size: 15.5px; margin-bottom: 24px; }
+.item { margin-top: 18px; }
+.item__row { display: flex; align-items: baseline; gap: 10px; }
+.item__name { font-weight: 700; font-size: 17.5px; }
+.item__dots { flex: 1; border-bottom: 2px dotted rgba(29,42,44,0.22); transform: translateY(-4px); min-width: 16px; }
+.item__price { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--coral-2); }
+.item__desc { font-size: 14.5px; color: var(--soft); margin-top: 2px; }
+.item__tag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SUNSET RITUAL — live countdown
+   ============================================================ */
+.ritual {
+  background: linear-gradient(180deg, var(--dusk) 0%, var(--dusk-2) 100%);
+  color: var(--sand);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ritual::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: -160px;
+  transform: translateX(-50%);
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,199,107,0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ritual .caps { color: var(--gold); display: block; margin-bottom: 14px; }
+.ritual h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 4.8vw, 54px);
+  line-height: 1.06;
+  max-width: 20ch;
+  margin: 0 auto;
+}
+.ritual h2 em { font-style: normal; color: var(--gold); }
+.ritual__count {
+  margin: 40px auto 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(52px, 9vw, 110px);
+  line-height: 1;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+}
+.ritual__label { color: rgba(247,236,217,0.75); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 13.5px; }
+.ritual p.blurb { margin: 30px auto 0; max-width: 480px; color: rgba(247,236,217,0.8); position: relative; z-index: 1; }
+
+/* ============================================================
+   VISIT
+   ============================================================ */
+.visit__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.visit .caps { color: var(--coral-2); display: block; margin-bottom: 14px; }
+.visit h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 4.6vw, 54px);
+  line-height: 1.05;
+}
+.visit h2 em { font-style: normal; color: var(--coral-2); }
+.visit p { margin-top: 16px; color: var(--soft); font-size: 17.5px; max-width: 460px; }
+.visit__cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+.hours {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 36px 36px 24px;
+  box-shadow: 0 20px 50px rgba(29,42,44,0.1);
+}
+.hours h3 {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.hours div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 2px dotted var(--line); font-weight: 700; }
+.hours div:last-of-type { border-bottom: none; }
+.hours .hot { color: var(--coral-2); }
+.hours p { margin-top: 14px; font-size: 14px; color: var(--soft); text-align: center; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--dusk-2);
+  color: var(--sand);
+  padding: 60px 0 46px;
+  text-align: center;
+}
+.footer__brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+}
+.footer__brand em { font-style: normal; color: var(--gold); }
+.footer p { margin-top: 10px; font-size: 14px; color: rgba(247,236,217,0.65); }
+.footer__credit {
+  margin-top: 26px !important;
+  padding-top: 20px;
+  border-top: 1px solid rgba(247,236,217,0.15);
+  font-size: 13px !important;
+}
+.footer__credit a { color: var(--gold); }
+
+@media (max-width: 800px) {
+  .boards, .visit__grid { grid-template-columns: 1fr; }
+  .section { padding: 76px 0; }
+  .hero { padding: 130px 0 0; }
+  .nav__links a:not(.btn) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top">🦎 The Salty <em>Iguana</em></a>
+    <div class="nav__links">
+      <a href="#menu">Menu</a>
+      <a href="#sunset">Sunset</a>
+      <a href="#visit">Find Us</a>
+      <a href="#visit" class="btn">Tonight's the night</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero__sun" aria-hidden="true"></div>
+  <div class="container">
+    <h1>Cold drinks. Warm sand. <em>Front-row sunsets.</em></h1>
+    <p class="hero__sub">
+      A little bar on the beach where the frozen drinks are cold,
+      the fish is fresh, and every sunset gets a round of applause.
+    </p>
+    <div class="hero__live" data-live>
+      <span class="dot"></span>
+      <span data-live-text>Checking the sky…</span>
+    </div>
+    <div class="hero__actions">
+      <a href="#menu" class="btn btn--sand">See the menu</a>
+      <a href="#sunset" class="btn">Sunset tonight</a>
+    </div>
+  </div>
+  <div class="hero__scene" aria-hidden="true">
+    <svg viewBox="0 0 760 200">
+      <!-- water -->
+      <path d="M0 150 Q 95 138 190 150 T 380 150 T 570 150 T 760 150 L 760 200 L 0 200 Z" fill="#0c3238" opacity="0.85"/>
+      <!-- sand bar -->
+      <path d="M0 176 Q 190 160 380 176 T 760 176 L 760 200 L 0 200 Z" fill="#123c40"/>
+      <!-- palm -->
+      <g transform="translate(120 40)">
+        <path d="M0 130 C 6 80 2 40 14 6" stroke="#0c3238" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <g fill="#0f4d54">
+          <path d="M14 6 C -26 -12 -58 -6 -74 12 C -42 8 -16 12 14 6 Z"/>
+          <path d="M14 6 C 50 -16 84 -10 100 8 C 68 4 42 10 14 6 Z"/>
+          <path d="M14 6 C -8 -28 -34 -34 -56 -28 C -30 -18 -6 -8 14 6 Z"/>
+          <path d="M14 6 C 34 -30 62 -36 84 -30 C 58 -20 32 -8 14 6 Z"/>
+        </g>
+      </g>
+      <!-- iguana on the sand -->
+      <g transform="translate(420 118)">
+        <!-- tail -->
+        <path d="M150 46 C 210 44 250 30 286 2 C 258 40 216 58 150 58 Z" fill="#79b843"/>
+        <!-- body -->
+        <path d="M30 32 C 55 8 120 6 150 28 C 162 38 160 54 146 58 L 40 58 C 22 56 18 42 30 32 Z" fill="#8cc655"/>
+        <!-- belly -->
+        <path d="M44 58 C 60 48 120 48 140 58 Z" fill="#a8d878"/>
+        <!-- head -->
+        <path d="M28 34 C 10 32 -6 40 -12 50 C -4 58 12 60 28 56 C 36 52 36 40 28 34 Z" fill="#8cc655"/>
+        <!-- crest spikes -->
+        <g fill="#5f9c30">
+          <path d="M40 24 L 46 10 L 54 22 Z"/>
+          <path d="M60 18 L 66 4 L 74 17 Z"/>
+          <path d="M82 15 L 88 2 L 96 15 Z"/>
+          <path d="M104 16 L 110 4 L 118 18 Z"/>
+          <path d="M126 22 L 132 10 L 138 24 Z"/>
+        </g>
+        <!-- legs -->
+        <path d="M52 58 L 48 72 L 62 72 L 60 58 Z" fill="#6faa3a"/>
+        <path d="M118 58 L 114 72 L 128 72 L 126 58 Z" fill="#6faa3a"/>
+        <!-- sunglasses -->
+        <g>
+          <rect x="-6" y="40" width="16" height="10" rx="4" fill="#1d2a2c"/>
+          <rect x="14" y="40" width="16" height="10" rx="4" fill="#1d2a2c"/>
+          <path d="M10 44 L 14 44" stroke="#1d2a2c" stroke-width="2.5"/>
+        </g>
+        <!-- smile -->
+        <path d="M-8 54 Q 2 58 12 55" stroke="#1d2a2c" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- drink -->
+        <g transform="translate(-34 30)">
+          <path d="M0 8 L 14 8 L 11 30 L 3 30 Z" fill="#ff7a4d"/>
+          <line x1="7" y1="8" x2="10" y2="-4" stroke="#1d2a2c" stroke-width="2"/>
+          <circle cx="11" cy="-6" r="3.4" fill="#ffc76b"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<div class="hh" data-hh>🍹 Happy hour daily, 4–6pm — <b>$2 off everything frozen</b></div>
+
+<!-- ============ MENU ============ -->
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section__head">
+      <span class="caps">The boards</span>
+      <h2>Frozen things &amp; <em>fried things.</em></h2>
+      <p>Two boards, zero decisions you'll regret.</p>
+    </div>
+    <div class="boards">
+      <div class="board board--drinks">
+        <h3 class="board__title">🍹 Drinks</h3>
+        <p class="board__note">frozen unless you say otherwise</p>
+        <div class="item">
+          <div class="item__row"><span class="item__name">The Salty Iguana<span class="item__tag">house</span></span><span class="item__dots"></span><span class="item__price">13</span></div>
+          <p class="item__desc">coconut rum, lime, sea salt rim, no apologies</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Painkiller</span><span class="item__dots"></span><span class="item__price">12</span></div>
+          <p class="item__desc">dark rum, pineapple, orange, coconut cream, nutmeg</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Rum Runner</span><span class="item__dots"></span><span class="item__price">12</span></div>
+          <p class="item__desc">two rums, banana, blackberry, a sunset in a cup</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Key Lime Colada</span><span class="item__dots"></span><span class="item__price">12</span></div>
+          <p class="item__desc">tastes like the pie, hits like the tide</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Iguana-Rita</span><span class="item__dots"></span><span class="item__price">11</span></div>
+          <p class="item__desc">frozen margarita, tajín rim, lime for days</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Cold Beer</span><span class="item__dots"></span><span class="item__price">6</span></div>
+          <p class="item__desc">in a bucket of ice if you're staying a while</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">No-Rum Runner<span class="item__tag">zero proof</span></span><span class="item__dots"></span><span class="item__price">8</span></div>
+          <p class="item__desc">all the fruit, none of the regret</p>
+        </div>
+      </div>
+      <div class="board board--bites">
+        <h3 class="board__title">🌮 Bites</h3>
+        <p class="board__note">eaten best with sandy feet</p>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Grilled Fish Tacos</span><span class="item__dots"></span><span class="item__price">15</span></div>
+          <p class="item__desc">catch of the day, slaw, lime crema, corn tortillas</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Coconut Shrimp</span><span class="item__dots"></span><span class="item__price">14</span></div>
+          <p class="item__desc">mango dipping sauce, extra napkins</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Cracked Conch Basket</span><span class="item__dots"></span><span class="item__price">16</span></div>
+          <p class="item__desc">fries, citrus aioli, island rite of passage</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Beach Nachos</span><span class="item__dots"></span><span class="item__price">13</span></div>
+          <p class="item__desc">the pile is structural, dig carefully</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Smash Burger</span><span class="item__dots"></span><span class="item__price">14</span></div>
+          <p class="item__desc">two patties, secret sauce, potato bun</p>
+        </div>
+        <div class="item">
+          <div class="item__row"><span class="item__name">Key Lime Pie<span class="item__tag">obviously</span></span><span class="item__dots"></span><span class="item__price">8</span></div>
+          <p class="item__desc">graham crust, torched meringue</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUNSET RITUAL ============ -->
+<section class="section ritual" id="sunset">
+  <div class="container">
+    <span class="caps">The nightly ritual</span>
+    <h2>When the sun touches the water, <em>we ring the bell.</em></h2>
+    <div class="ritual__count" data-countdown>—:—:—</div>
+    <div class="ritual__label" data-countdown-label>until sunset tonight</div>
+    <p class="blurb">
+      Live from the sky above the bar. Grab a drink, find a seat in the sand,
+      and don't you dare check your phone during the good part.
+    </p>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="section visit" id="visit">
+  <div class="container visit__grid">
+    <div>
+      <span class="caps">Find us</span>
+      <h2>Toes in the sand, <em>end of the boardwalk.</em></h2>
+      <p>
+        Follow the smell of coconut shrimp and the sound of a bell at dusk.
+        Barefoot is business casual here.
+      </p>
+      <div class="visit__cta">
+        <a href="#menu" class="btn">See the menu</a>
+      </div>
+    </div>
+    <div class="hours">
+      <h3>Hours</h3>
+      <div><span>Every day</span><span>11 AM – 10 PM</span></div>
+      <div><span>Happy hour</span><span class="hot">4 – 6 PM</span></div>
+      <div><span>Sunset bell</span><span class="hot" data-sunset-time>at sunset</span></div>
+      <p>Kitchen closes at 9. The sunset never does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__brand">🦎 The Salty <em>Iguana</em></div>
+    <p>Beach Bar &amp; Kitchen · Open daily 11–10 · Sunset bell every night</p>
+    <p class="footer__credit">
+      The Salty Iguana is a fictional beach bar — this site is a concept build by
+      <a href="https://milezero.vercel.app">Mile Zero Studio</a>, with live weather and
+      a real sunset clock for Key West, Florida.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   LIVE SKY — Open-Meteo: current temp + tonight's sunset for
+   Key West. Powers the hero chip, countdown, and happy hour.
+   ============================================================ */
+(function() {
+  var API = 'https://api.open-meteo.com/v1/forecast?latitude=24.5551&longitude=-81.7800&current=temperature_2m&daily=sunset&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=2';
+  var sunsetToday = null, sunsetTomorrow = null;
+
+  function kwNow() {
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  }
+  function fmtClock(d) {
+    var h = d.getHours() % 12 || 12;
+    var m = String(d.getMinutes()).padStart(2, '0');
+    return h + ':' + m + (d.getHours() >= 12 ? 'pm' : 'am');
+  }
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  fetch(API)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var temp = Math.round(d.current.temperature_2m);
+      sunsetToday = new Date(d.daily.sunset[0]);
+      sunsetTomorrow = new Date(d.daily.sunset[1]);
+      var el = document.querySelector('[data-live-text]');
+      if (el) el.textContent = temp + '°F on the sand right now';
+      var st = document.querySelector('[data-sunset-time]');
+      if (st) st.textContent = fmtClock(sunsetToday) + ' tonight';
+      tick();
+    })
+    .catch(function() {
+      var el = document.querySelector('[data-live-text]');
+      if (el) el.textContent = 'Perfect beach weather, probably';
+    });
+
+  function tick() {
+    var now = kwNow();
+    var cd = document.querySelector('[data-countdown]');
+    var lbl = document.querySelector('[data-countdown-label]');
+    if (cd && sunsetToday) {
+      var target = now < sunsetToday ? sunsetToday : sunsetTomorrow;
+      var diff = Math.max(0, target - now);
+      var afterGlow = now >= sunsetToday && (now - sunsetToday) < 40 * 60000;
+      if (afterGlow) {
+        cd.textContent = '🔔';
+        lbl.textContent = 'the bell rang — golden hour in progress';
+      } else {
+        var hrs = Math.floor(diff / 3600000);
+        var mins = Math.floor((diff % 3600000) / 60000);
+        var secs = Math.floor((diff % 60000) / 1000);
+        cd.textContent = pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+        lbl.textContent = now < sunsetToday ? 'until sunset tonight' : 'until sunset tomorrow';
+      }
+    }
+    /* happy hour ribbon */
+    var hh = document.querySelector('[data-hh]');
+    if (hh) {
+      var mins2 = now.getHours() * 60 + now.getMinutes();
+      if (mins2 >= 960 && mins2 < 1080) {
+        hh.innerHTML = '🍹 <b>HAPPY HOUR IS ON RIGHT NOW</b> — $2 off everything frozen until 6pm';
+      }
+    }
+  }
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
