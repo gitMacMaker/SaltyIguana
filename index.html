@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c3238'/%3E%3Ccircle cx='32' cy='38' r='15' fill='%23ffc76b'/%3E%3Crect x='8' y='37' width='48' height='4' fill='%230c3238'/%3E%3Cpath d='M8 44 L56 44' stroke='%23ff7a4d' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,100,1;1,9..144,300..900,100,1&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    THE SALTY IGUANA — dusk on the sand
@@ -26,11 +26,20 @@
   --soft:   #5f7376;
   --iguana: #79b843;
   --line:   #e3d4b8;
-  --font-display: 'Baloo 2', cursive;
+  --font-display: 'Fraunces', serif;
   --font-body: 'Karla', sans-serif;
   --radius: 22px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 html { scroll-behavior: smooth; }
 [id] { scroll-margin-top: 90px; }
 body {
@@ -74,8 +83,8 @@ body {
 }
 .nav__brand {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 24px;
+  font-weight: 600;
+  font-size: 23px;
   color: var(--sand);
   text-decoration: none;
   display: flex;
@@ -96,9 +105,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 13.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   background: var(--coral);
@@ -126,6 +137,19 @@ body {
   padding: 160px 0 0;
   text-align: center;
 }
+.hero__stars {
+  position: absolute;
+  inset: 0 0 55% 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 30%, rgba(247,236,217,0.9), transparent),
+    radial-gradient(1px 1px at 26% 14%, rgba(247,236,217,0.7), transparent),
+    radial-gradient(1.6px 1.6px at 38% 42%, rgba(247,236,217,0.75), transparent),
+    radial-gradient(1px 1px at 55% 10%, rgba(247,236,217,0.8), transparent),
+    radial-gradient(1.3px 1.3px at 68% 26%, rgba(247,236,217,0.7), transparent),
+    radial-gradient(1px 1px at 81% 16%, rgba(247,236,217,0.85), transparent),
+    radial-gradient(1.5px 1.5px at 90% 38%, rgba(247,236,217,0.7), transparent);
+}
 .hero__sun {
   position: absolute;
   left: 50%;
@@ -138,10 +162,11 @@ body {
 }
 .hero h1 {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(44px, 7vw, 92px);
-  line-height: 1.02;
-  max-width: 16ch;
+  font-weight: 600;
+  font-size: clamp(42px, 6.6vw, 86px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  max-width: 17ch;
   margin: 0 auto;
 }
 .hero h1 em { font-style: normal; color: var(--gold); }
@@ -195,9 +220,10 @@ body {
 .section__head .caps { color: var(--coral-2); display: block; margin-bottom: 12px; }
 .section__head h2 {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(34px, 5vw, 58px);
-  line-height: 1.04;
+  font-weight: 600;
+  font-size: clamp(32px, 4.8vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
 }
 .section__head h2 em { font-style: normal; color: var(--coral-2); }
 .section__head p { margin-top: 12px; color: var(--soft); font-size: 17.5px; }
@@ -221,9 +247,9 @@ body {
 .board--bites::before { background: var(--iguana); }
 .board__title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 28px;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  font-size: 27px;
+  letter-spacing: 0;
   margin-bottom: 4px;
 }
 .board__note { font-style: italic; color: var(--soft); font-size: 15.5px; margin-bottom: 24px; }
@@ -231,7 +257,7 @@ body {
 .item__row { display: flex; align-items: baseline; gap: 10px; }
 .item__name { font-weight: 700; font-size: 17.5px; }
 .item__dots { flex: 1; border-bottom: 2px dotted rgba(29,42,44,0.22); transform: translateY(-4px); min-width: 16px; }
-.item__price { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--coral-2); }
+.item__price { font-family: var(--font-display); font-weight: 600; font-size: 17.5px; color: var(--coral-2); }
 .item__desc { font-size: 14.5px; color: var(--soft); margin-top: 2px; }
 .item__tag {
   display: inline-block;
@@ -271,17 +297,17 @@ body {
 .ritual .caps { color: var(--gold); display: block; margin-bottom: 14px; }
 .ritual h2 {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(32px, 4.8vw, 54px);
-  line-height: 1.06;
-  max-width: 20ch;
+  font-weight: 600;
+  font-size: clamp(30px, 4.6vw, 50px);
+  line-height: 1.12;
+  max-width: 21ch;
   margin: 0 auto;
 }
 .ritual h2 em { font-style: normal; color: var(--gold); }
 .ritual__count {
   margin: 44px auto 12px;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(52px, 9vw, 110px);
   line-height: 1;
   color: var(--gold);
@@ -306,9 +332,9 @@ body {
 .visit .caps { color: var(--coral-2); display: block; margin-bottom: 14px; }
 .visit h2 {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(32px, 4.6vw, 54px);
-  line-height: 1.05;
+  font-weight: 600;
+  font-size: clamp(30px, 4.4vw, 50px);
+  line-height: 1.1;
 }
 .visit h2 em { font-style: normal; color: var(--coral-2); }
 .visit p { margin-top: 16px; color: var(--soft); font-size: 17.5px; max-width: 460px; }
@@ -323,8 +349,8 @@ body {
 .hours h3 {
   text-align: center;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 22px;
+  font-weight: 600;
+  font-size: 21px;
   margin-bottom: 14px;
 }
 .hours div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 2px dotted var(--line); font-weight: 700; }
@@ -343,8 +369,8 @@ body {
 }
 .footer__brand {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 30px;
+  font-weight: 600;
+  font-size: 28px;
 }
 .footer__brand em { font-style: normal; color: var(--gold); }
 .footer p { margin-top: 10px; font-size: 14px; color: rgba(247,236,217,0.65); }
@@ -381,6 +407,7 @@ body {
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <div class="hero__stars" aria-hidden="true"></div>
   <div class="hero__sun" aria-hidden="true"></div>
   <div class="container">
     <h1>Cold drinks. Warm sand. <em>Front-row sunsets.</em></h1>
@@ -413,39 +440,27 @@ body {
           <path d="M14 6 C 34 -30 62 -36 84 -30 C 58 -20 32 -8 14 6 Z"/>
         </g>
       </g>
-      <!-- iguana on the sand -->
+      <!-- iguana silhouette at dusk -->
       <g transform="translate(420 118)">
-        <!-- tail -->
-        <path d="M150 46 C 210 44 250 30 286 2 C 258 40 216 58 150 58 Z" fill="#79b843"/>
-        <!-- body -->
-        <path d="M30 32 C 55 8 120 6 150 28 C 162 38 160 54 146 58 L 40 58 C 22 56 18 42 30 32 Z" fill="#8cc655"/>
-        <!-- belly -->
-        <path d="M44 58 C 60 48 120 48 140 58 Z" fill="#a8d878"/>
-        <!-- head -->
-        <path d="M28 34 C 10 32 -6 40 -12 50 C -4 58 12 60 28 56 C 36 52 36 40 28 34 Z" fill="#8cc655"/>
-        <!-- crest spikes -->
-        <g fill="#5f9c30">
+        <g fill="#0c3238">
+          <path d="M150 46 C 210 44 250 30 286 2 C 258 40 216 58 150 58 Z"/>
+          <path d="M30 32 C 55 8 120 6 150 28 C 162 38 160 54 146 58 L 40 58 C 22 56 18 42 30 32 Z"/>
+          <path d="M28 34 C 10 32 -6 40 -12 50 C -4 58 12 60 28 56 C 36 52 36 40 28 34 Z"/>
           <path d="M40 24 L 46 10 L 54 22 Z"/>
           <path d="M60 18 L 66 4 L 74 17 Z"/>
           <path d="M82 15 L 88 2 L 96 15 Z"/>
           <path d="M104 16 L 110 4 L 118 18 Z"/>
           <path d="M126 22 L 132 10 L 138 24 Z"/>
+          <path d="M52 58 L 48 72 L 62 72 L 60 58 Z"/>
+          <path d="M118 58 L 114 72 L 128 72 L 126 58 Z"/>
         </g>
-        <!-- legs -->
-        <path d="M52 58 L 48 72 L 62 72 L 60 58 Z" fill="#6faa3a"/>
-        <path d="M118 58 L 114 72 L 128 72 L 126 58 Z" fill="#6faa3a"/>
-        <!-- sunglasses -->
-        <g>
-          <rect x="-6" y="40" width="16" height="10" rx="4" fill="#1d2a2c"/>
-          <rect x="14" y="40" width="16" height="10" rx="4" fill="#1d2a2c"/>
-          <path d="M10 44 L 14 44" stroke="#1d2a2c" stroke-width="2.5"/>
-        </g>
-        <!-- smile -->
-        <path d="M-8 54 Q 2 58 12 55" stroke="#1d2a2c" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <!-- drink -->
+        <!-- golden rim light along the back -->
+        <path d="M30 32 C 55 8 120 6 150 28 M150 46 C 210 44 250 30 286 2"
+              fill="none" stroke="#ffc76b" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/>
+        <!-- the drink stays lit -->
         <g transform="translate(-34 30)">
           <path d="M0 8 L 14 8 L 11 30 L 3 30 Z" fill="#ff7a4d"/>
-          <line x1="7" y1="8" x2="10" y2="-4" stroke="#1d2a2c" stroke-width="2"/>
+          <line x1="7" y1="8" x2="10" y2="-4" stroke="#0c3238" stroke-width="2"/>
           <circle cx="11" cy="-6" r="3.4" fill="#ffc76b"/>
         </g>
       </g>
